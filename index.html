@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>图片轮播简单特效</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0}
+		ul,li{list-style: none}
+		img{width: 100%}
+		#bigBox{width: 353px;height: 220px;overflow: hidden;margin: 0 auto;}
+		#box{width: 100%;position: relative;}
+		#box ul li{display: block;width: 100%}
+		.controller{
+			position: absolute;
+			background: rgba(0,0,0,0.5);
+			color:#fff;
+			font-size: 20px;
+			z-index: 999;
+			top:80px;
+			padding: 5px 10px;
+			text-decoration: none;
+		}
+		#pre{
+			left: 0;
+		}
+		#next{
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+<!-- 网上教程一般都是通过改变left的值去进行图片切换，我感觉这样做不太灵活，图片数目要固定
+     后来参照一下选项卡的方法，用下面的那一种方法，图片数目可以随意更改
+     如果大家有什么好的方法请告知一下我 邮箱：610259820@qq.com
+ -->
+	<div id="bigBox">
+		<div id="box">
+			<ul>
+				<li><img src="1.jpg" alt=""></li>
+				<li><img src="2.jpg" alt=""></li>
+				<li><img src="3.jpg" alt=""></li>
+				<li><img src="4.jpg" alt=""></li>
+				<li><img src="5.jpg" alt=""></li>
+			</ul>
+			<a href="javascript:;" class="controller" id="pre"><</a>
+			<a href="javascript:;" class="controller" id="next">></a>
+		</div>
+	</div>
+	<script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var length=$('#box ul li').length;//获取图片的个数
+			var id=0;//记录第几张图片
+			$('#box ul li').hide().eq(0).show();
+			$('#next').click(function(){
+				if(id<length-1){
+					id=id+1;
+					$('#box ul li').hide().eq(id).fadeIn(500);
+				}else{
+					id=0;
+					$('#box ul li').hide().eq(id).fadeIn(500);
+				}
+			});
+			$('#pre').click(function(){
+				if(id>0){
+					id=id-1;
+					$('#box ul li').hide().eq(id).fadeIn(500);
+				}
+				else if(id<=0){
+					id=length-1;
+					$('#box ul li').hide().eq(id).fadeIn(500);
+				}
+			})
+		});
+	</script>
+</body>
+</html>
